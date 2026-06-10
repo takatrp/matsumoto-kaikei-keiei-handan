@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>打ち手・ツールLP</title>
+    <title>次の一手まで決める経営判断支援｜税理士法人松本会計</title>
     <meta name="description" content="支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。無料公開ツールで考え方を体験し、松本会計が月次体制づくりから実行・検証まで伴走します。" />
     <link rel="canonical" href="https://takatrp.github.io/matsumoto-kaikei-jidouka/" />
+    <meta name="theme-color" content="#578899" />
 
     <!-- Google tag (gtag.js) - GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XX3J7H4NF1"></script>
@@ -26,30 +27,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@600;700;800&display=swap"
         rel="stylesheet">
 
     <style>
+        /* ==========================================================
+           Design tokens
+           ========================================================== */
         :root {
             --brand: #578899;
             --brand-light: #7aa2b0;
             --brand-dark: #3e6473;
+            --brand-deep: #2c4a57;
+            --brand-pale: #eef4f6;
             --accent: #e6eff3;
-            --text-main: #1e293b;
-            --text-sub: #64748b;
-            --bg-body: #f8fafc;
+            --gold: #b9985f;
+
+            --text-main: #16222e;
+            --text-sub: #5b6b7b;
+            --text-faint: #8696a6;
+
+            --bg-body: #fbfcfd;
+            --bg-light: #f2f7f8;
             --bg-card: #ffffff;
-            --border: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-            --radius-sm: 8px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --font-sans: 'Noto Sans JP', sans-serif;
-            --font-serif: 'Shippori Mincho', serif;
+            --bg-dark: #122433;
+            --bg-dark-2: #1a3142;
+
+            --border: #e3eaee;
+            --border-strong: #cfdce1;
+
+            --shadow-sm: 0 1px 2px rgba(28, 51, 62, 0.06);
+            --shadow-md: 0 6px 16px -4px rgba(28, 51, 62, 0.10), 0 2px 4px -2px rgba(28, 51, 62, 0.05);
+            --shadow-lg: 0 24px 48px -16px rgba(28, 51, 62, 0.16), 0 8px 16px -8px rgba(28, 51, 62, 0.06);
+            --shadow-brand: 0 8px 24px -6px rgba(87, 136, 153, 0.45);
+
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 28px;
+
+            --font-sans: 'Noto Sans JP', "Hiragino Kaku Gothic ProN", sans-serif;
+            --font-serif: 'Shippori Mincho', "Hiragino Mincho ProN", serif;
+
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --section-y: clamp(64px, 9vw, 104px);
         }
 
+        /* ==========================================================
+           Reset / base
+           ========================================================== */
         *,
         *::before,
         *::after {
@@ -58,6 +83,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 84px;
         }
 
         body {
@@ -66,14 +92,20 @@
             font-family: var(--font-sans);
             color: var(--text-main);
             background: var(--bg-body);
-            line-height: 1.6;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
             -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        ::selection {
+            background: rgba(87, 136, 153, 0.22);
         }
 
         a {
             color: inherit;
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
         img {
@@ -82,34 +114,59 @@
             display: block;
         }
 
+        :focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -48px;
+            left: 16px;
+            z-index: 2000;
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 0 0 10px 10px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         .container {
             width: 100%;
             max-width: 1120px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .max-w-md {
             max-width: 800px;
         }
 
-        h1,
-        h2,
-        h3,
-        h4 {
+        h1, h2, h3, h4 {
             margin: 0;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         h1 {
             font-family: var(--font-serif);
             font-weight: 800;
+            font-feature-settings: "palt";
         }
 
         h2 {
             font-family: var(--font-serif);
-            font-size: clamp(24px, 4vw, 32px);
-            margin-bottom: 16px;
+            font-weight: 700;
+            font-feature-settings: "palt";
+            font-size: clamp(25px, 3.6vw, 34px);
+            letter-spacing: 0.02em;
+            margin-bottom: 18px;
             color: var(--text-main);
         }
 
@@ -118,42 +175,77 @@
         }
 
         .lead {
-            font-size: 1.1rem;
+            font-size: clamp(15px, 1.6vw, 17px);
             color: var(--text-sub);
+            line-height: 2;
         }
 
         .note-text {
             font-size: 12px;
-            color: var(--text-sub);
+            color: var(--text-faint);
             margin-top: 12px;
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+            background: linear-gradient(120deg, var(--brand) 0%, var(--brand-deep) 90%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .section-padding {
-            padding: 80px 0;
+            padding: var(--section-y) 0;
         }
 
-        @media (max-width: 768px) {
-            .section-padding {
-                padding: 60px 0;
-            }
+        .text-center {
+            text-align: center;
+        }
+
+        /* ==========================================================
+           Header
+           ========================================================== */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand-light), var(--brand-dark));
+            z-index: 1200;
+            pointer-events: none;
+            transition: width 0.08s linear;
         }
 
         #site-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            height: 70px;
+            border-bottom: 1px solid rgba(227, 234, 238, 0.7);
+            height: 72px;
             display: flex;
             align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* 背景＋ぼかしは疑似要素に分離（backdrop-filterを直接当てると
+           fixed配置のモバイルドロワーの基準がヘッダーになり崩れるため） */
+        #site-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.82);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            z-index: -1;
+            transition: background 0.3s ease;
+        }
+
+        #site-header.scrolled {
+            box-shadow: 0 6px 24px -12px rgba(28, 51, 62, 0.18);
+        }
+
+        #site-header.scrolled::before {
+            background: rgba(255, 255, 255, 0.94);
         }
 
         #site-header .inner {
@@ -169,24 +261,50 @@
         }
 
         .logo img {
-            height: 48px;
+            height: 46px;
             width: auto;
+        }
+
+        .logo img.mark {
+            border-radius: 8px;
         }
 
         #site-nav {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 26px;
         }
 
         #site-nav a:not(.btn) {
+            position: relative;
             font-size: 14px;
             font-weight: 500;
             color: var(--text-sub);
+            padding: 4px 0;
         }
 
-        #site-nav a:not(.btn):hover {
-            color: var(--brand);
+        #site-nav a:not(.btn)::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--brand);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s var(--ease-out);
+        }
+
+        #site-nav a:not(.btn):hover,
+        #site-nav a:not(.btn).active {
+            color: var(--brand-dark);
+        }
+
+        #site-nav a:not(.btn):hover::after,
+        #site-nav a:not(.btn).active::after {
+            transform: scaleX(1);
         }
 
         .external-link {
@@ -196,146 +314,263 @@
         }
 
         .ico-ext {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
+            opacity: 0.75;
         }
 
+        /* ==========================================================
+           Buttons
+           ========================================================== */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
+            gap: 8px;
+            padding: 13px 28px;
             border-radius: 99px;
+            font-family: var(--font-sans);
             font-weight: 700;
-            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+            transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out),
+                        background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
             cursor: pointer;
             border: 1px solid transparent;
             font-size: 15px;
+            line-height: 1.4;
+            white-space: nowrap;
         }
 
         .btn-sm {
-            padding: 8px 20px;
+            padding: 9px 22px;
             font-size: 14px;
         }
 
         .btn-lg {
-            padding: 14px 32px;
+            padding: 16px 36px;
             font-size: 16px;
         }
 
         .btn-primary {
-            background: var(--brand);
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(87, 136, 153, 0.3);
+            box-shadow: var(--shadow-brand);
         }
 
         .btn-primary:hover {
-            background: var(--brand-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(87, 136, 153, 0.4);
+            box-shadow: 0 12px 28px -6px rgba(62, 100, 115, 0.55);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .btn-outline {
             background: #fff;
-            border-color: var(--border);
+            border-color: var(--border-strong);
             color: var(--brand-dark);
         }
 
         .btn-outline:hover {
             border-color: var(--brand);
-            background: var(--accent);
+            background: var(--brand-pale);
+            transform: translateY(-2px);
         }
 
         .btn-accent {
             background: #fff;
-            color: var(--brand);
+            color: var(--brand-dark);
+            box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.4);
         }
 
         .btn-accent:hover {
-            background: #f1f5f9;
+            background: var(--brand-pale);
+            transform: translateY(-2px);
         }
 
         .btn-outline-white {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.45);
             color: #fff;
         }
 
         .btn-outline-white:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: #fff;
+            transform: translateY(-2px);
         }
 
+        .btn .arrow {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            transition: transform 0.25s var(--ease-out);
+        }
+
+        .btn:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        /* ==========================================================
+           Hero
+           ========================================================== */
         .hero {
             position: relative;
-            padding: 60px 0 30px;
+            padding: clamp(56px, 8vw, 96px) 0 36px;
             overflow: hidden;
-            background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%);
+            background:
+                radial-gradient(900px 480px at 88% -10%, rgba(122, 162, 176, 0.16), transparent 65%),
+                radial-gradient(720px 420px at -10% 80%, rgba(87, 136, 153, 0.10), transparent 60%),
+                linear-gradient(180deg, #ffffff 0%, #f3f8f9 100%);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(87, 136, 153, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(87, 136, 153, 0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            -webkit-mask-image: radial-gradient(720px 480px at 70% 20%, #000 0%, transparent 75%);
+            mask-image: radial-gradient(720px 480px at 70% 20%, #000 0%, transparent 75%);
+            pointer-events: none;
         }
 
         .hero-wrap {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: clamp(32px, 5vw, 56px);
             align-items: center;
             position: relative;
             z-index: 1;
         }
 
         .hero-title {
-            font-size: clamp(30px, 4.5vw, 44px);
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: clamp(30px, 4.4vw, 46px);
+            margin-bottom: 22px;
+            line-height: 1.32;
+            letter-spacing: 0.015em;
         }
 
         .hero-title-sub {
-            font-size: 0.7em;
-            font-weight: 600;
-            color: var(--text-sub);
-            display: block;
-            margin-bottom: 4px;
+            display: flex;
+            width: -moz-fit-content;
+            width: fit-content;
+            align-items: center;
+            gap: 8px;
             font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--brand-dark);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-strong);
+            border-radius: 99px;
+            padding: 7px 16px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-title-sub::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--brand);
+            box-shadow: 0 0 0 3px rgba(87, 136, 153, 0.18);
         }
 
         .hero-desc {
-            font-size: 16px;
+            font-size: clamp(15px, 1.6vw, 16.5px);
             color: var(--text-sub);
-            margin-bottom: 28px;
-            line-height: 1.8;
+            margin-bottom: 30px;
+            line-height: 2;
+        }
+
+        .hero-desc strong {
+            color: var(--brand-dark);
         }
 
         .cta-row {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
+        }
+
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 28px;
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(87, 136, 153, 0.18);
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .trust-label {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--text-faint);
+        }
+
+        .trust-value {
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--brand-dark);
+            line-height: 1.4;
+            font-feature-settings: "tnum";
+        }
+
+        .trust-value small {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-sub);
         }
 
         .hero-media {
             position: relative;
         }
 
+        .hero-media::after {
+            content: "";
+            position: absolute;
+            inset: 14% -6% -10% 10%;
+            background: linear-gradient(135deg, rgba(87, 136, 153, 0.16), rgba(122, 162, 176, 0.05));
+            border-radius: var(--radius-lg);
+            z-index: -1;
+        }
+
         .media-frame {
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
             background: #fff;
-            padding: 12px;
-            transform: perspective(1000px) rotateY(-2deg);
-            transition: transform 0.5s ease;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
         }
 
         .media-frame:hover {
-            transform: perspective(1000px) rotateY(0deg);
+            transform: translateY(-6px);
+            box-shadow: 0 32px 64px -20px rgba(28, 51, 62, 0.28);
         }
 
         .media-frame img {
-            border-radius: 12px;
+            border-radius: calc(var(--radius-lg) - 10px);
             width: 100%;
         }
 
         .media-frame.video-frame {
             padding: 0;
-            background: #000;
+            background: #0c1820;
             aspect-ratio: 4 / 3;
             display: flex;
             align-items: center;
@@ -347,79 +582,127 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             transform: scale(1.06);
             transform-origin: center;
         }
 
+        /* ==========================================================
+           Portal features (3つの価値)
+           ========================================================== */
         #portal-features {
-            padding: 20px 0;
+            padding: clamp(40px, 6vw, 72px) 0 16px;
         }
 
         .portal-features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-bottom: 40px;
+            gap: 24px;
+            margin-bottom: 24px;
         }
 
         .p-feature-card {
-            background: #fff;
-            padding: 24px;
+            position: relative;
+            background: var(--bg-card);
+            padding: 32px 26px 28px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border);
             text-align: center;
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s ease;
+            overflow: hidden;
+        }
+
+        .p-feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand-light), var(--brand-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--ease-out);
         }
 
         .p-feature-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            border-color: var(--brand-light);
+        }
+
+        .p-feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .pf-icon {
-            font-size: 40px;
-            margin-bottom: 16px;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--brand-pale), #fff 70%);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-dark);
+        }
+
+        .pf-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .pf-step {
             display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--brand);
+            margin-bottom: 6px;
         }
 
         .p-feature-card h3 {
             font-size: 18px;
             margin-bottom: 12px;
-            color: var(--brand-dark);
+            color: var(--brand-deep);
         }
 
         .p-feature-card p {
             font-size: 14px;
             color: var(--text-sub);
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .portal-features-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-        }
-
+        /* ==========================================================
+           Section headers
+           ========================================================== */
         .section-header {
-            margin-bottom: 48px;
+            margin-bottom: clamp(40px, 5vw, 56px);
             text-align: center;
         }
 
         .section-subtitle {
-            display: block;
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--brand);
-            margin-bottom: 8px;
+            letter-spacing: 0.22em;
+            color: var(--brand-dark);
+            background: var(--brand-pale);
+            border: 1px solid rgba(87, 136, 153, 0.18);
+            padding: 6px 16px;
+            border-radius: 99px;
+            margin-bottom: 16px;
         }
 
-        .text-center {
-            text-align: center;
+        .section-dark .section-subtitle {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .grid {
@@ -428,147 +711,412 @@
         }
 
         .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
         }
 
-        .tool-card {
-            background: #fff;
-            border: 1px solid var(--border);
+        .bg-light {
+            background:
+                radial-gradient(800px 400px at 100% 0%, rgba(122, 162, 176, 0.08), transparent 60%),
+                var(--bg-light);
+        }
+
+        /* ==========================================================
+           Approach / feature cards
+           ========================================================== */
+        .approach-card {
+            background: var(--bg-card);
+            padding: 34px 30px;
             border-radius: var(--radius-md);
-            padding: 24px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s ease;
         }
 
-        .tool-card:hover {
+        .approach-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--brand-light);
+        }
+
+        .card-num {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(87, 136, 153, 0.28);
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-family: var(--font-serif);
+            font-feature-settings: "tnum";
+            pointer-events: none;
+        }
+
+        .approach-card h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            position: relative;
+            color: var(--brand-deep);
+            padding-bottom: 12px;
+        }
+
+        .approach-card h3::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--brand), var(--brand-light));
+        }
+
+        .approach-card p {
+            font-size: 14.5px;
+            color: var(--text-sub);
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* ==========================================================
+           Feature pills / assumption card
+           ========================================================== */
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 44px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 99px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            font-size: 14px;
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .check-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .assumption-card {
+            margin-top: 40px;
+            background:
+                linear-gradient(135deg, rgba(87, 136, 153, 0.05), rgba(255, 255, 255, 0) 50%),
+                #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--brand);
+            border-radius: var(--radius-md);
+            padding: 32px 34px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .assumption-card h3 {
+            font-family: var(--font-serif);
+            font-feature-settings: "palt";
+            font-size: 20px;
+            margin-bottom: 14px;
+            color: var(--brand-deep);
+        }
+
+        .assumption-card p {
+            font-size: 15px;
+            color: var(--text-sub);
+            line-height: 2;
+            margin-bottom: 0;
+        }
+
+        .assumption-card strong {
+            color: var(--brand-dark);
+        }
+
+        /* ==========================================================
+           Screens carousel
+           ========================================================== */
+        .screens-container {
+            position: relative;
+            padding: 0 8px;
+        }
+
+        .screens-scroll-wrapper {
+            overflow-x: auto;
+            padding-bottom: 18px;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-light) transparent;
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+        }
+
+        .screens-scroll-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .screens-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: var(--brand-light);
+            border-radius: 99px;
+        }
+
+        .screens-scroll-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .screens-track {
+            display: flex;
+            gap: 22px;
+            padding: 12px 24px;
+        }
+
+        .screen {
+            flex: 0 0 256px;
+            scroll-snap-align: center;
+            margin: 0;
+            transition: transform 0.35s var(--ease-out);
+            cursor: zoom-in;
+        }
+
+        .screen:hover {
+            transform: translateY(-6px);
+        }
+
+        .screen img {
+            border-radius: 22px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.35s ease;
+        }
+
+        .screen:hover img {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .scroll-hint {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            color: var(--text-faint);
+        }
+
+        /* ==========================================================
+           Benefit flow
+           ========================================================== */
+        .benefit-flow {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            padding: 44px 40px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin-top: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-flow::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-light), var(--brand), var(--brand-dark));
+        }
+
+        .benefit-list {
+            flex: 1.1;
+        }
+
+        .benefit-list ul {
+            margin: 0;
+            padding-left: 24px;
+            list-style: none;
+        }
+
+        .benefit-list li {
+            position: relative;
+            margin-bottom: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .benefit-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-list li::before {
+            content: "";
+            position: absolute;
+            left: -22px;
+            top: 0.55em;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--brand);
+            box-shadow: 0 0 0 3px rgba(87, 136, 153, 0.16);
+        }
+
+        .benefit-arrow {
+            color: var(--brand);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--brand-pale);
+        }
+
+        .benefit-arrow svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .benefit-result {
+            flex: 1;
+            font-family: var(--font-serif);
+            font-feature-settings: "palt";
+            font-size: clamp(19px, 2.2vw, 22px);
+            font-weight: 800;
+            color: var(--brand-deep);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================
+           Tool cards
+           ========================================================== */
+        .tool-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 30px 28px;
+            transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .tool-card::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand-light), var(--brand-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--brand-light);
+        }
+
+        .tool-card:hover::after {
+            transform: scaleX(1);
         }
 
         .tool-card h3 {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 12px;
+            color: var(--brand-deep);
+            line-height: 1.5;
         }
 
         .tool-card p {
             font-size: 14px;
             color: var(--text-sub);
             flex-grow: 1;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            line-height: 1.85;
         }
 
         .link-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--brand);
+            transition: gap 0.25s var(--ease-out);
+        }
+
+        .tool-card:hover .link-text {
+            gap: 10px;
+            color: var(--brand-dark);
         }
 
         .demo-gif-wrap {
-            margin-top: 40px;
+            margin-top: 52px;
             text-align: center;
         }
 
         .demo-frame {
             background: #fff;
-            padding: 8px;
+            padding: 10px;
             border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
             display: inline-block;
             max-width: 100%;
             margin: 0;
         }
 
         .demo-frame img {
-            border-radius: 12px;
+            border-radius: calc(var(--radius-md) - 8px);
         }
 
         figcaption {
-            margin-top: 8px;
+            margin-top: 12px;
             font-size: 12px;
-            color: var(--text-sub);
+            color: var(--text-faint);
         }
 
         #ai-funnel {
-            padding-top: 40px;
+            padding-top: clamp(48px, 6vw, 72px);
         }
 
-        .bg-light {
-            background: #f1f5f9;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            padding: 8px 16px;
-            border-radius: 99px;
-            box-shadow: var(--shadow-sm);
-            font-size: 14px;
-        }
-
-        .check-icon {
-            color: var(--brand);
-            font-weight: 900;
-        }
-
-        .screens-container {
-            position: relative;
-            padding: 0 20px;
-        }
-
-        .screens-scroll-wrapper {
-            overflow-x: auto;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-            scroll-snap-type: x mandatory;
-        }
-
-        .screens-track {
-            display: flex;
-            gap: 20px;
-            padding: 10px;
-        }
-
-        .screen {
-            flex: 0 0 260px;
-            scroll-snap-align: center;
-            margin: 0;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .screen:hover {
-            transform: scale(1.02);
-        }
-
-        .screen img {
-            border-radius: 20px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-        }
-
-        .scroll-hint {
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-sub);
-            opacity: 0.7;
-        }
-
+        /* ==========================================================
+           Automation (dark)
+           ========================================================== */
         .section-dark {
-            background: #1e293b;
+            background:
+                radial-gradient(900px 500px at 85% 10%, rgba(87, 136, 153, 0.28), transparent 60%),
+                radial-gradient(700px 460px at 0% 100%, rgba(125, 211, 252, 0.10), transparent 55%),
+                linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
             color: #fff;
             position: relative;
             overflow: hidden;
@@ -580,8 +1128,8 @@
 
         .automation-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: clamp(36px, 5vw, 56px);
             align-items: center;
         }
 
@@ -590,7 +1138,13 @@
         }
 
         .text-white-opacity {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 2;
+        }
+
+        .text-white-opacity strong {
+            color: #aee3fb;
+            font-weight: 700;
         }
 
         .text-accent {
@@ -598,28 +1152,33 @@
         }
 
         .stat-box {
-            margin: 24px 0;
-            padding: 20px;
+            margin: 28px 0;
+            padding: 24px 28px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
         }
 
         .stat-label {
-            font-size: 14px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
             opacity: 0.8;
         }
 
         .stat-value {
-            font-size: 48px;
-            font-weight: 800;
+            font-size: 54px;
+            font-weight: 900;
             line-height: 1;
-            margin: 8px 0;
+            margin: 10px 0;
             color: #7dd3fc;
+            font-feature-settings: "tnum";
+            text-shadow: 0 0 32px rgba(125, 211, 252, 0.35);
         }
 
         .stat-value small {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .stat-plus {
@@ -629,23 +1188,23 @@
 
         .stat-desc {
             font-size: 13px;
-            opacity: 0.7;
+            opacity: 0.72;
         }
 
         .circle-wrapper {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 310px;
+            height: 310px;
             margin: 0 auto;
         }
 
         .auto-circle {
             width: 100%;
             height: 100%;
-            border: 2px dashed rgba(255, 255, 255, 0.6);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             position: relative;
-            animation: spin 20s linear infinite;
+            animation: spin 28s linear infinite;
         }
 
         .center-logo {
@@ -653,49 +1212,50 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px;
+            width: 104px;
             height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            transition: transform 0.3s;
+            transition: transform 0.3s var(--ease-out);
         }
 
         .center-logo:hover {
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: translate(-50%, -50%) scale(1.08);
         }
 
         .center-logo img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px;
-            box-shadow: 0 0 20px rgba(87, 136, 153, 0.5);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            box-shadow: 0 0 36px rgba(125, 211, 252, 0.45);
         }
 
         .orbit-item {
             position: absolute;
-            padding: 6px 12px;
-            background: #fff;
+            padding: 7px 14px;
+            background: rgba(255, 255, 255, 0.96);
             border-radius: 99px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 12px;
             font-weight: 700;
-            color: var(--brand-dark);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            color: var(--brand-deep);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             white-space: nowrap;
-            animation: counter-spin 20s linear infinite;
+            animation: counter-spin 28s linear infinite;
             text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
         }
 
         .orbit-item:hover {
             background-color: var(--brand);
             color: #fff;
+            box-shadow: 0 0 24px rgba(125, 211, 252, 0.5);
             z-index: 20;
         }
 
@@ -720,142 +1280,136 @@
             to { transform: translate(-50%, -50%) rotate(-360deg); }
         }
 
-        .approach-card {
-            background: #fff;
-            padding: 32px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-num {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--accent);
-            position: absolute;
-            top: -10px;
-            right: 10px;
-            opacity: 0.5;
-            font-family: var(--font-serif);
-        }
-
-        .approach-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .assumption-card {
-            margin-top: 32px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-left: 5px solid var(--brand);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .assumption-card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: var(--brand-dark);
-        }
-
-        .assumption-card p {
-            font-size: 15px;
-            color: var(--text-sub);
-            line-height: 1.8;
-            margin-bottom: 0;
-        }
-
+        /* ==========================================================
+           Process timeline
+           ========================================================== */
         .process-timeline {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 18px;
             max-width: 820px;
             margin: 0 auto;
         }
 
         .process-item {
             display: flex;
-            gap: 20px;
+            gap: 22px;
             background: #fff;
-            padding: 20px;
+            padding: 24px 26px;
             border-radius: var(--radius-md);
+            border: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
             align-items: center;
+            position: relative;
+            transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s ease;
+        }
+
+        .process-item:hover {
+            transform: translateX(6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--brand-light);
+        }
+
+        .process-item:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 46px;
+            top: 100%;
+            height: 18px;
+            border-left: 2px dashed rgba(87, 136, 153, 0.4);
         }
 
         .proc-marker {
-            width: 40px;
-            height: 40px;
-            background: var(--brand);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            font-feature-settings: "tnum";
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(87, 136, 153, 0.35);
         }
 
         .proc-content h3 {
-            font-size: 18px;
+            font-size: 17px;
             margin-bottom: 4px;
+            color: var(--brand-deep);
         }
 
         .proc-content p {
             margin: 0;
             font-size: 14px;
             color: var(--text-sub);
+            line-height: 1.8;
         }
 
+        /* ==========================================================
+           Results
+           ========================================================== */
         .main-result {
             max-width: 780px;
             margin: 0 auto;
             background: #fff;
-            padding: 40px;
+            padding: clamp(28px, 4vw, 44px);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-result::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-light), var(--brand), var(--brand-dark));
         }
 
         .result-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             gap: 16px;
             flex-wrap: wrap;
         }
 
         .result-head h3 {
             font-size: 20px;
+            color: var(--brand-deep);
         }
 
         .badge-highlight {
             background: #ecfdf5;
-            color: #059669;
-            padding: 4px 12px;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            padding: 5px 14px;
             border-radius: 99px;
             font-weight: 700;
             font-size: 14px;
+            font-feature-settings: "tnum";
         }
 
         .bar-group {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .bar-label {
             font-size: 14px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         .bar-area {
-            height: 32px;
-            background: #f1f5f9;
+            height: 34px;
+            background: var(--bg-light);
             border-radius: 99px;
             overflow: hidden;
             position: relative;
@@ -866,22 +1420,26 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 12px;
+            padding-right: 14px;
             color: #fff;
             font-weight: 700;
             font-size: 14px;
+            font-feature-settings: "tnum";
             border-radius: 99px;
             width: 0;
             --target-width: 0%;
-            animation: grow 1.5s ease-out forwards;
+        }
+
+        .fade-in-up.visible .bar {
+            animation: grow 1.5s var(--ease-out) 0.2s forwards;
         }
 
         .bar.primary {
-            background: var(--brand);
+            background: linear-gradient(90deg, var(--brand-light), var(--brand-dark));
         }
 
         .bar.secondary {
-            background: #94a3b8;
+            background: #9aa9b8;
         }
 
         .bar-val {
@@ -896,84 +1454,14 @@
 
         .result-note {
             font-size: 12px;
-            color: var(--text-sub);
-            margin-top: 20px;
+            color: var(--text-faint);
+            margin-top: 22px;
+            margin-bottom: 0;
         }
 
-
-        .benefit-flow {
-            background: #fff;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            margin-top: 48px;
-        }
-
-        .benefit-list {
-            flex: 1;
-        }
-
-        .benefit-list ul {
-            margin: 0;
-            padding-left: 20px;
-            list-style: none;
-        }
-
-        .benefit-list li {
-            position: relative;
-            margin-bottom: 12px;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .benefit-list li::before {
-            content: "・";
-            color: var(--brand);
-            font-weight: bold;
-            position: absolute;
-            left: -1em;
-        }
-
-        .benefit-arrow {
-            color: var(--brand);
-            flex-shrink: 0;
-        }
-
-        .benefit-arrow svg {
-            width: 48px;
-            height: 48px;
-        }
-
-        .benefit-result {
-            flex: 1;
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--brand-dark);
-            line-height: 1.4;
-        }
-
-        @media (max-width: 768px) {
-            .benefit-flow {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .benefit-list ul {
-                padding: 0;
-                text-align: left;
-                display: inline-block;
-            }
-
-            .benefit-arrow svg {
-                transform: rotate(90deg);
-            }
-        }
-
+        /* ==========================================================
+           FAQ accordion
+           ========================================================== */
         .accordion {
             display: flex;
             flex-direction: column;
@@ -985,16 +1473,30 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .acc-item[open] {
+            border-color: var(--brand-light);
+            box-shadow: var(--shadow-md);
         }
 
         .acc-head {
-            padding: 16px 20px;
+            padding: 18px 22px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
             list-style: none;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .acc-head:hover {
+            color: var(--brand-dark);
+            background: var(--brand-pale);
         }
 
         .acc-head::-webkit-details-marker {
@@ -1002,60 +1504,136 @@
         }
 
         .acc-head .icon {
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid var(--text-sub);
-            border-bottom: 2px solid var(--text-sub);
+            width: 9px;
+            height: 9px;
+            flex-shrink: 0;
+            border-right: 2px solid var(--brand);
+            border-bottom: 2px solid var(--brand);
             transform: rotate(45deg);
-            transition: transform 0.2s;
+            transition: transform 0.25s var(--ease-out);
+            margin-top: -4px;
         }
 
         .acc-item[open] .acc-head .icon {
             transform: rotate(-135deg);
+            margin-top: 4px;
         }
 
         .acc-body {
-            padding: 0 20px 20px;
+            padding: 0 22px 20px;
             font-size: 14px;
             color: var(--text-sub);
-            line-height: 1.6;
+            line-height: 1.9;
         }
 
+        .acc-item[open] .acc-body {
+            animation: acc-fade 0.35s var(--ease-out);
+        }
+
+        @keyframes acc-fade {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================================
+           Contact
+           ========================================================== */
         .contact-card {
-            background: #fff;
-            padding: 40px;
+            position: relative;
+            background:
+                radial-gradient(620px 320px at 85% -10%, rgba(125, 211, 252, 0.16), transparent 60%),
+                linear-gradient(150deg, var(--brand-dark) 0%, var(--brand-deep) 100%);
+            color: #fff;
+            padding: clamp(36px, 5vw, 56px);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 32px 64px -24px rgba(44, 74, 87, 0.55);
             text-align: center;
-            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .contact-card > * {
+            position: relative;
         }
 
         .contact-card h2 {
-            margin-bottom: 16px;
+            color: #fff;
+            margin-bottom: 18px;
+        }
+
+        .contact-card p {
+            color: rgba(255, 255, 255, 0.86);
+            line-height: 2;
         }
 
         .btn-wide {
-            min-width: 240px;
-            margin: 24px 0;
+            min-width: 260px;
+            margin: 26px 0;
         }
 
         .contact-info {
             font-size: 14px;
-            color: var(--text-sub);
+            color: rgba(255, 255, 255, 0.78);
         }
 
+        .contact-info a {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.4);
+            text-underline-offset: 3px;
+        }
+
+        .contact-info a:hover {
+            text-decoration-color: #fff;
+        }
+
+        /* ==========================================================
+           Footer
+           ========================================================== */
         footer {
-            padding: 40px 0;
+            padding: 44px 0 40px;
             text-align: center;
             font-size: 13px;
-            color: var(--text-sub);
+            color: var(--text-faint);
             border-top: 1px solid var(--border);
+            background: #fff;
         }
 
+        footer a {
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: var(--brand-dark);
+        }
+
+        /* ==========================================================
+           Mobile nav / CTA
+           ========================================================== */
         .backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(12, 24, 32, 0.5);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
             z-index: 900;
             opacity: 0;
             pointer-events: none;
@@ -1090,7 +1668,7 @@
             background-color: var(--text-main);
             border-radius: 2px;
             position: absolute;
-            transition: transform 0.15s ease;
+            transition: transform 0.2s var(--ease-out), background-color 0.2s ease, top 0.2s ease, bottom 0.2s ease;
         }
 
         .hamburger-inner {
@@ -1128,10 +1706,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+            background: rgba(255, 255, 255, 0.92);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
             border-top: 1px solid var(--border);
+            box-shadow: 0 -8px 24px -12px rgba(28, 51, 62, 0.18);
             z-index: 900;
         }
 
@@ -1140,14 +1720,28 @@
             width: 100%;
         }
 
-        @media (max-width: 768px) {
+        /* ==========================================================
+           Responsive
+           ========================================================== */
+        @media (max-width: 900px) {
             .hero-wrap {
                 grid-template-columns: 1fr;
             }
 
+            .hero-media {
+                max-width: 560px;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
             .media-frame {
-                transform: none !important;
-                margin-top: 20px;
+                margin-top: 8px;
+            }
+
+            .media-frame:hover {
+                transform: none;
             }
 
             .media-frame.video-frame {
@@ -1158,8 +1752,33 @@
                 object-position: center;
             }
 
+            .hero-trust {
+                gap: 8px 22px;
+            }
+
+            .portal-features-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
             .automation-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .benefit-flow {
+                flex-direction: column;
+                text-align: center;
+                padding: 36px 24px;
+            }
+
+            .benefit-list ul {
+                padding: 0 0 0 24px;
+                text-align: left;
+                display: inline-block;
+            }
+
+            .benefit-arrow {
+                transform: rotate(90deg);
             }
 
             .nav-toggle {
@@ -1168,20 +1787,21 @@
 
             #site-nav {
                 position: fixed;
-                top: 70px;
+                top: 72px;
                 right: 0;
                 bottom: 0;
-                width: 80%;
-                max-width: 300px;
+                width: 82%;
+                max-width: 320px;
                 background: #fff;
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 20px 0;
+                padding: 16px 0;
                 transform: translateX(100%);
-                transition: transform 0.3s ease;
-                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: transform 0.32s var(--ease-out);
+                box-shadow: -16px 0 40px rgba(12, 24, 32, 0.16);
                 z-index: 1001;
                 gap: 0;
+                overflow-y: auto;
             }
 
             #site-nav.open {
@@ -1189,20 +1809,25 @@
             }
 
             #site-nav a:not(.btn) {
-                font-size: 18px;
+                font-size: 16px;
                 color: var(--text-main);
                 font-weight: 600;
-                padding: 12px 24px;
+                padding: 14px 24px;
                 width: 100%;
-                display: block;
+                display: flex;
                 background-color: #fff;
                 border-bottom: 1px solid var(--accent);
             }
 
-            #site-nav a:not(.btn):hover {
+            #site-nav a:not(.btn)::after {
+                display: none;
+            }
+
+            #site-nav a:not(.btn):hover,
+            #site-nav a:not(.btn).active {
                 color: var(--brand);
-                background-color: var(--bg-body);
-                padding-left: 28px;
+                background-color: var(--brand-pale);
+                padding-left: 30px;
                 transition: all 0.2s ease;
             }
 
@@ -1218,19 +1843,26 @@
                 transform-origin: center;
             }
 
+            .process-item:hover {
+                transform: none;
+            }
+
             .mobile-cta {
                 display: block;
             }
 
             body {
-                padding-bottom: 80px;
+                padding-bottom: 84px;
             }
         }
 
+        /* ==========================================================
+           Scroll reveal & motion
+           ========================================================== */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(24px);
+            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
         }
 
         .fade-in-up.visible {
@@ -1239,17 +1871,44 @@
         }
 
         .delay-100 {
-            transition-delay: 0.1s;
+            transition-delay: 0.12s;
         }
 
         .delay-200 {
-            transition-delay: 0.2s;
+            transition-delay: 0.24s;
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .fade-in-up {
+                opacity: 1;
+                transform: none;
+            }
+
+            .fade-in-up.visible .bar {
+                animation: none;
+                width: var(--target-width);
+            }
+        }
+
+        /* ==========================================================
+           Lightbox / PDF modal
+           ========================================================== */
         #lightbox {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(8, 16, 22, 0.92);
             z-index: 2000;
             display: flex;
             align-items: center;
@@ -1266,24 +1925,35 @@
 
         .lb-content img {
             max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 8px;
+            max-height: 88vh;
+            border-radius: 12px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
         }
 
         .lb-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
-            padding: 10px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             border-radius: 50%;
+            transition: background 0.2s ease;
+        }
+
+        .lb-nav svg {
+            width: 22px;
+            height: 22px;
         }
 
         .lb-nav:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.35);
         }
 
         .lb-prev {
@@ -1296,19 +1966,21 @@
 
         .lb-close {
             position: absolute;
-            top: 20px;
+            top: 18px;
             right: 20px;
             background: none;
             border: none;
             color: #fff;
-            font-size: 30px;
+            font-size: 32px;
+            line-height: 1;
             cursor: pointer;
+            padding: 8px;
         }
 
         #pdfbox {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(8, 16, 22, 0.85);
             z-index: 2000;
             display: none;
             align-items: center;
@@ -1325,14 +1997,15 @@
             width: 100%;
             max-width: 1000px;
             height: 90vh;
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
         }
 
         .panel header {
-            padding: 12px 20px;
+            padding: 14px 22px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -1340,9 +2013,26 @@
             font-weight: 700;
         }
 
+        .panel .close {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 6px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .panel .close:hover {
+            background: var(--brand-pale);
+            color: var(--brand-dark);
+        }
+
         .iframe-wrap {
             flex: 1;
-            background: #eee;
+            background: #eef1f3;
         }
 
         iframe {
@@ -1357,19 +2047,108 @@
             font-size: 13px;
             border-top: 1px solid var(--border);
         }
+
+        .fallback a {
+            color: var(--brand);
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
     </style>
 
-    <link rel="preload" as="image" href="hero3.jpg" onerror="this.href='https://placehold.co/1920x1080?text=Hero+Image'" />
+    <noscript>
+        <style>
+            .fade-in-up { opacity: 1; transform: none; }
+            .bar { animation: none; width: var(--target-width); }
+        </style>
+    </noscript>
+
+    <link rel="preload" as="image" href="hero3.jpg" />
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="打ち手・ツールLP">
+    <meta property="og:title" content="次の一手まで決める経営判断支援｜税理士法人松本会計">
     <meta property="og:description" content="支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。松本会計は、月次体制づくりから打ち手の実行・検証まで伴走します。">
-    <meta property="og:image" content="hero3.jpg">
+    <meta property="og:image" content="https://takatrp.github.io/matsumoto-kaikei-jidouka/hero3.jpg">
     <meta property="og:url" content="https://takatrp.github.io/matsumoto-kaikei-jidouka/">
+    <meta property="og:site_name" content="税理士法人松本会計">
+    <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AccountingService",
+          "name": "税理士法人松本会計",
+          "url": "https://www.matsumoto-kaikei.or.jp/",
+          "image": "https://takatrp.github.io/matsumoto-kaikei-jidouka/hero3.jpg",
+          "description": "支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。月次体制づくりから実行・検証まで伴走する経営判断支援。",
+          "telephone": "+81-859-44-6195",
+          "areaServed": "JP"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "必要売上を出した後、結局どう動けばいいか分からないのですが？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "松本会計では、必要売上の把握だけで終わらせず、その回収方法を「単価」「数量」「自動化」の3方向から整理し、実行の優先順位まで一緒に考えます。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "打ち手整理の支援は、どんな会社でもすぐに受けられますか？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "この支援を十分に活かすには、最新の限界利益率が見えていることが重要です。そのため、記帳代行のままではなく、自計化や月次決算の早期化が前提になります。松本会計でも体制づくりを支援しますが、会社側でも入力や運用整備に取り組んでいただくことで、より実効性の高い支援になります。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "こうしたツールは誰でも使えますか？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "はい。松本会計ツールポータル内のツールは公開しており、数字で考える入口としてどなたでもお試しいただけます。月次の場では、スタッフと一緒に試算結果を見ながら、会社ごとの実行方針まで整理します。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "記帳代行から自計化へ移行するメリットは？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "意思決定の速度が上がることです。月次の数字が早く見えることで、支出・値上げ・採用・投資について、その場で必要売上と打ち手を整理しやすくなります。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "どこまで“自動化”できますか？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "銀行/カード/売上・仕入のデータ受信、経費ワークフロー、証憑保存、定型仕訳、請求・回収消込などが対象です。最終チェックは人が担保し、例外処理はルール化してエラーを減らします。"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "コスト（料金）はどのように決まりますか？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "規模・対象範囲（自動化・管理会計・伴走頻度）で変動します。初回相談後に提案書と見積をご提示します。"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">本文へスキップ</a>
+    <div id="scroll-progress" aria-hidden="true"></div>
+
     <header id="site-header">
         <div class="container inner">
             <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener"
@@ -1387,7 +2166,7 @@
                 <a href="#results">実績</a>
                 <a href="#faq">FAQ</a>
                 <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="external-link">公式サイト
-                    <svg viewBox="0 0 24 24" class="ico-ext">
+                    <svg viewBox="0 0 24 24" class="ico-ext" aria-hidden="true">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
@@ -1411,12 +2190,12 @@
             target="_blank" rel="noopener" data-cta="mobile-contact">次の一手を一緒に整理する</a>
     </div>
 
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="container hero-wrap">
                 <div class="hero-content fade-in-up">
                     <h1 class="hero-title">
-                        <span class="hero-title-sub">松本会計の経営判断支援で</span>
+                        <span class="hero-title-sub">松本会計の経営判断支援</span>
                         必要売上を出すだけで終わらせない。<br>
                         <span class="text-gradient">次の一手まで</span>決める。
                     </h1>
@@ -1427,8 +2206,24 @@
                         自計化と月次の数字をもとに、次の一手まで一緒に決めます。
                     </p>
                     <div class="cta-row">
-                        <a class="btn btn-primary btn-lg" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="hero-tool-portal">無料ツールを試す</a>
+                        <a class="btn btn-primary btn-lg" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="hero-tool-portal">無料ツールを試す
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
                         <a class="btn btn-outline btn-lg" href="#contact" data-cta="hero-contact">次の一手を一緒に整理する</a>
+                    </div>
+                    <div class="hero-trust" aria-label="実績ハイライト">
+                        <div class="trust-item">
+                            <span class="trust-label">黒字申告割合（自計化関与先）</span>
+                            <span class="trust-value">63.3<small>%</small></span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-label">経理業務の自動化率</span>
+                            <span class="trust-value">90<small>%超</small></span>
+                        </div>
+                        <div class="trust-item">
+                            <span class="trust-label">対応拠点</span>
+                            <span class="trust-value">境港<small>・</small>神戸</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1448,17 +2243,26 @@
             <div class="container">
                 <div class="portal-features-grid fade-in-up">
                     <div class="p-feature-card">
-                        <span class="pf-icon">①</span>
+                        <div class="pf-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+                        </div>
+                        <span class="pf-step">STEP 01</span>
                         <h3>必要売上が見える</h3>
                         <p>支出・投資・固定費増を、<br>限界利益率から「必要売上」に<br>即座に換算します。</p>
                     </div>
                     <div class="p-feature-card">
-                        <span class="pf-icon">②</span>
+                        <div class="pf-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+                        </div>
+                        <span class="pf-step">STEP 02</span>
                         <h3>打ち手が絞れる</h3>
                         <p>単価・数量・自動化の3方向で、<br>どこから回収するかを<br>数字で整理できます。</p>
                     </div>
                     <div class="p-feature-card">
-                        <span class="pf-icon">③</span>
+                        <div class="pf-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-2a6 6 0 0 1 6-6"/><path d="M14 4l6 3-6 3z"/><path d="M14 7v10a3 3 0 0 1-3 3H4"/></svg>
+                        </div>
+                        <span class="pf-step">STEP 03</span>
                         <h3>行動に落ちる</h3>
                         <p>月次の対話の中で、<br>最初の一歩と確認ポイントまで<br>明確にしていきます。</p>
                     </div>
@@ -1480,32 +2284,32 @@
 
                 <div class="feature-list fade-in-up delay-100">
                     <div class="feature-item">
-                        <span class="check-icon">✓</span>
+                        <span class="check-icon" aria-hidden="true">✓</span>
                         <div><strong>売上換算</strong>：支出額を「必要な売上」に変換</div>
                     </div>
                     <div class="feature-item">
-                        <span class="check-icon">✓</span>
+                        <span class="check-icon" aria-hidden="true">✓</span>
                         <div><strong>打ち手比較</strong>：単価・数量・自動化の3方向で整理</div>
                     </div>
                     <div class="feature-item">
-                        <span class="check-icon">✓</span>
+                        <span class="check-icon" aria-hidden="true">✓</span>
                         <div><strong>行動化</strong>：最初の一歩と確認ポイントまで明確化</div>
                     </div>
                 </div>
 
                 <div class="grid grid-3 fade-in-up delay-100">
                     <div class="approach-card">
-                        <div class="card-num">01</div>
+                        <div class="card-num" aria-hidden="true">01</div>
                         <h3>売上換算する</h3>
                         <p>支出や投資を、限界利益率から「必要な売上」に換算。まず、回収すべき金額を明確にします。</p>
                     </div>
                     <div class="approach-card">
-                        <div class="card-num">02</div>
+                        <div class="card-num" aria-hidden="true">02</div>
                         <h3>打ち手を比較する</h3>
                         <p>その売上を、単価・数量・自動化のどこで回収するかを整理。感覚ではなく、数字で方向を決めます。</p>
                     </div>
                     <div class="approach-card">
-                        <div class="card-num">03</div>
+                        <div class="card-num" aria-hidden="true">03</div>
                         <h3>次の一手を決める</h3>
                         <p>最初の一歩、やめること、確認指標まで落とし込み、月次の対話の中で実行と検証につなげます。</p>
                     </div>
@@ -1524,7 +2328,7 @@
                     </p>
                 </div>
 
-                <div class="screens-container fade-in-up delay-200" style="margin-top:40px;">
+                <div class="screens-container fade-in-up delay-200" style="margin-top:48px;">
                     <p class="lead text-center" style="margin-bottom:24px;">
                         ツールポータルでは、こうした考え方を実際に触れます。<br>
                         月次の場では、試算結果を見ながら会社ごとの打ち手に落とし込みます。
@@ -1535,29 +2339,29 @@
                                 <img src="iPhoneモック1.png"
                                     onerror="this.src='https://placehold.co/260x500?text=Screen+1'"
                                     alt="支出を必要売上へ換算する画面"
-                                    loading="lazy">
+                                    loading="lazy" decoding="async">
                             </figure>
                             <figure class="screen">
                                 <img src="iPhoneモック3.png"
                                     onerror="this.src='https://placehold.co/260x500?text=Screen+2'"
                                     alt="単価・数量・自動化の3方向で打ち手を比較する画面"
-                                    loading="lazy">
+                                    loading="lazy" decoding="async">
                             </figure>
                             <figure class="screen">
                                 <img src="iPhoneモック4.png"
                                     onerror="this.src='https://placehold.co/260x500?text=Screen+3'"
                                     alt="最初の一歩と確認ポイントを整理する画面"
-                                    loading="lazy">
+                                    loading="lazy" decoding="async">
                             </figure>
                             <figure class="screen">
                                 <img src="iPhoneモック0.png"
                                     onerror="this.src='https://placehold.co/260x500?text=Screen+4'"
                                     alt="公開ツールポータルの利用イメージ"
-                                    loading="lazy">
+                                    loading="lazy" decoding="async">
                             </figure>
                         </div>
                     </div>
-                    <div class="scroll-hint">Scroll &rarr;</div>
+                    <div class="scroll-hint">SCROLL &rarr;</div>
                 </div>
 
                 <div class="benefit-flow fade-in-up delay-200">
@@ -1569,7 +2373,7 @@
                             <li>月次で検証し、打ち手を磨き込む</li>
                         </ul>
                     </div>
-                    <div class="benefit-arrow">
+                    <div class="benefit-arrow" aria-hidden="true">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1599,19 +2403,25 @@
                     <a href="https://takatrp.github.io/hendou_PL_LP/" target="_blank" rel="noopener" class="tool-card">
                         <h3>ボールで学ぶ<br>変動損益計算書</h3>
                         <p>どの要素に手を加えれば「限界利益＞固定費」となるかを、直感的に学べます。</p>
-                        <span class="link-text">試してみる &rarr;</span>
+                        <span class="link-text">試してみる
+                            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
                     </a>
                     <a href="https://takatrp.github.io/jidouka-kouka-LP/" target="_blank" rel="noopener"
                         class="tool-card">
                         <h3>自動化効果<br>試算ツール</h3>
                         <p>経理業務の自動化によって、どれだけの時間とコストを削減できるか試算します。</p>
-                        <span class="link-text">試してみる &rarr;</span>
+                        <span class="link-text">試してみる
+                            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
                     </a>
                     <a href="https://takatrp.github.io/price-up-down-LP/" target="_blank" rel="noopener"
                         class="tool-card">
                         <h3>価格改定<br>検討ツール</h3>
                         <p>値上げ・値下げが利益にどう影響するかをシミュレーションできます。</p>
-                        <span class="link-text">試してみる &rarr;</span>
+                        <span class="link-text">試してみる
+                            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
                     </a>
                 </div>
 
@@ -1620,13 +2430,13 @@
                         基礎の理解と感覚づくりは無料ツールで。<br>
                         その先の「では何をするか」は、松本会計の伴走の中で整理していきます。
                     </p>
-                    <div class="cta-row" style="justify-content:center; margin-bottom:24px;">
+                    <div class="cta-row" style="justify-content:center; margin-bottom:28px;">
                         <a class="btn btn-primary" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="free-tools-portal">無料ツールを試す</a>
                         <a class="btn btn-outline" href="#contact" data-cta="free-tools-contact">次の一手を一緒に整理する</a>
                     </div>
                     <figure class="demo-frame">
                         <img src="変動PL.gif" onerror="this.src='https://placehold.co/600x400?text=Demo+GIF'"
-                            alt="“ボールで学ぶ変動損益計算書”の動作イメージ" loading="lazy">
+                            alt="“ボールで学ぶ変動損益計算書”の動作イメージ" loading="lazy" decoding="async">
                     </figure>
                     <figcaption>“ボールで学ぶ変動損益計算書” の操作イメージ</figcaption>
                 </div>
@@ -1638,7 +2448,7 @@
                 <div class="automation-grid">
                     <div class="automation-content fade-in-up">
                         <span class="section-subtitle text-accent">Automation</span>
-                        <h2 class="text-white">自動化は、<br>コスト削減だけでなく“打ち手”です。</h2>
+                        <h2 class="text-white">自動化は、<br>コスト削減だけでなく<span style="white-space:nowrap;">“打ち手”</span>です。</h2>
                         <p class="text-white-opacity">
                             価格を上げるか、数量を増やすか、それとも自動化で時間を生み出すか。<br>
                             松本会計では、自動化を単なる効率化ではなく、<br>
@@ -1648,7 +2458,7 @@
                         </p>
                         <div class="stat-box">
                             <div class="stat-label">自動化率</div>
-                            <div class="stat-value">90<small>%</small><span class="stat-plus">超</span></div>
+                            <div class="stat-value"><span class="stat-num" data-count="90">0</span><small>%</small><span class="stat-plus">超</span></div>
                             <div class="stat-desc">浮いた時間を、付加価値活動へ振り向ける設計まで支援します</div>
                         </div>
                         <div class="cta-row">
@@ -1690,17 +2500,17 @@
                 </div>
                 <div class="grid grid-3 gap-lg fade-in-up delay-100">
                     <div class="approach-card">
-                        <div class="card-num">01</div>
+                        <div class="card-num" aria-hidden="true">01</div>
                         <h3>必要売上の見える化</h3>
                         <p>支出や投資を「売上に直すといくらか」で把握し、経営判断の前提を揃えます。</p>
                     </div>
                     <div class="approach-card">
-                        <div class="card-num">02</div>
+                        <div class="card-num" aria-hidden="true">02</div>
                         <h3>単価・数量・自動化で整理</h3>
                         <p>必要売上をどう作るかを3方向から整理し、感覚ではなく数字で打ち手を選びます。</p>
                     </div>
                     <div class="approach-card">
-                        <div class="card-num">03</div>
+                        <div class="card-num" aria-hidden="true">03</div>
                         <h3>月次伴走で実行・検証</h3>
                         <p>試算して終わらせず、巡回監査と対話の中で、実行状況と結果を毎月見直します。</p>
                     </div>
@@ -1809,7 +2619,7 @@
                 </div>
                 <div class="accordion fade-in-up delay-100">
                     <details class="acc-item">
-                        <summary class="acc-head">必要売上を出した後、結局どう動けばいいか分からないのですが？<span class="icon"></span></summary>
+                        <summary class="acc-head">必要売上を出した後、結局どう動けばいいか分からないのですが？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 松本会計では、必要売上の把握だけで終わらせず、
@@ -1819,7 +2629,7 @@
                         </div>
                     </details>
                     <details class="acc-item">
-                        <summary class="acc-head">打ち手整理の支援は、どんな会社でもすぐに受けられますか？<span class="icon"></span></summary>
+                        <summary class="acc-head">打ち手整理の支援は、どんな会社でもすぐに受けられますか？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 この支援を十分に活かすには、最新の限界利益率が見えていることが重要です。
@@ -1830,7 +2640,7 @@
                         </div>
                     </details>
                     <details class="acc-item">
-                        <summary class="acc-head">こうしたツールは誰でも使えますか？<span class="icon"></span></summary>
+                        <summary class="acc-head">こうしたツールは誰でも使えますか？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 はい。松本会計ツールポータル内のツールは公開しており、数字で考える入口としてどなたでもお試しいただけます。
@@ -1839,7 +2649,7 @@
                         </div>
                     </details>
                     <details class="acc-item">
-                        <summary class="acc-head">記帳代行から自計化へ移行するメリットは？<span class="icon"></span></summary>
+                        <summary class="acc-head">記帳代行から自計化へ移行するメリットは？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 意思決定の速度が上がることです。月次の数字が早く見えることで、
@@ -1848,7 +2658,7 @@
                         </div>
                     </details>
                     <details class="acc-item">
-                        <summary class="acc-head">どこまで“自動化”できますか？<span class="icon"></span></summary>
+                        <summary class="acc-head">どこまで“自動化”できますか？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 銀行/カード/売上・仕入のデータ受信、経費ワークフロー、証憑保存、定型仕訳、請求・回収消込などが対象です。
@@ -1857,7 +2667,7 @@
                         </div>
                     </details>
                     <details class="acc-item">
-                        <summary class="acc-head">コスト（料金）はどのように決まりますか？<span class="icon"></span></summary>
+                        <summary class="acc-head">コスト（料金）はどのように決まりますか？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
                                 規模・対象範囲（自動化・管理会計・伴走頻度）で変動します。
@@ -1880,8 +2690,10 @@
                         会社側での体制整備も重要になります。<br>
                         オンライン／来所どちらも対応可能です。
                     </p>
-                    <a class="btn btn-primary btn-wide" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry"
-                        target="_blank" rel="noopener" data-cta="contact-contract">次の一手を一緒に整理する</a>
+                    <a class="btn btn-accent btn-lg btn-wide" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry"
+                        target="_blank" rel="noopener" data-cta="contact-contract">次の一手を一緒に整理する
+                        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
                     <div class="contact-info">
                         <p>電話：境港 <a href="tel:0859446195">0859-44-6195</a> ／ 神戸 <a
                                 href="tel:0782422177">078-242-2177</a></p>
@@ -1936,6 +2748,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* ---------- Mobile nav ---------- */
             const navToggle = document.querySelector('.nav-toggle');
             const nav = document.getElementById('site-nav');
             const backdrop = document.getElementById('nav-backdrop');
@@ -1947,7 +2762,8 @@
                 navToggle.classList.toggle('active', !isOpen);
                 backdrop.classList.toggle('show', !isOpen);
                 body.style.overflow = isOpen ? '' : 'hidden';
-                navToggle.setAttribute('aria-expanded', !isOpen);
+                navToggle.setAttribute('aria-expanded', String(!isOpen));
+                navToggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
             }
 
             navToggle.addEventListener('click', toggleMenu);
@@ -1959,6 +2775,19 @@
                 });
             });
 
+            /* ---------- Header state & scroll progress ---------- */
+            const header = document.getElementById('site-header');
+            const progress = document.getElementById('scroll-progress');
+
+            function onScroll() {
+                header.classList.toggle('scrolled', window.scrollY > 8);
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                progress.style.width = max > 0 ? (window.scrollY / max * 100) + '%' : '0%';
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            /* ---------- Scroll reveal ---------- */
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1966,12 +2795,57 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { root: null, rootMargin: '0px', threshold: 0.1 });
+            }, { root: null, rootMargin: '0px 0px -8%', threshold: 0.1 });
 
             document.querySelectorAll('.fade-in-up').forEach(el => {
                 observer.observe(el);
             });
 
+            /* ---------- Scroll spy (active nav link) ---------- */
+            const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]:not(.btn)'));
+            const spyTargets = navLinks
+                .map(link => document.getElementById(link.getAttribute('href').slice(1)))
+                .filter(Boolean);
+
+            if ('IntersectionObserver' in window && spyTargets.length) {
+                const spy = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            navLinks.forEach(l =>
+                                l.classList.toggle('active', l.getAttribute('href') === '#' + entry.target.id));
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+                spyTargets.forEach(sec => spy.observe(sec));
+            }
+
+            /* ---------- Stat count-up ---------- */
+            const statNum = document.querySelector('.stat-num');
+            if (statNum) {
+                const target = parseInt(statNum.dataset.count, 10) || 0;
+                if (prefersReducedMotion) {
+                    statNum.textContent = target;
+                } else {
+                    const counter = new IntersectionObserver((entries, obs) => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            obs.unobserve(entry.target);
+                            const duration = 1400;
+                            const start = performance.now();
+                            function tick(now) {
+                                const p = Math.min((now - start) / duration, 1);
+                                const eased = 1 - Math.pow(1 - p, 3);
+                                statNum.textContent = Math.round(target * eased);
+                                if (p < 1) requestAnimationFrame(tick);
+                            }
+                            requestAnimationFrame(tick);
+                        });
+                    }, { threshold: 0.4 });
+                    counter.observe(statNum);
+                }
+            }
+
+            /* ---------- Lightbox ---------- */
             const lightbox = document.getElementById('lightbox');
             const lbImg = lightbox.querySelector('img');
             const lbPrev = lightbox.querySelector('.lb-prev');
@@ -1985,6 +2859,7 @@
                 if (index < 0 || index >= screens.length) return;
                 currentIndex = index;
                 lbImg.src = screens[index].src;
+                lbImg.alt = screens[index].alt || '拡大表示';
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden', 'false');
                 body.style.overflow = 'hidden';
@@ -2017,13 +2892,7 @@
             lbPrev.addEventListener('click', (e) => { e.stopPropagation(); nextImage(-1); });
             lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(1); });
 
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('open')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') nextImage(-1);
-                if (e.key === 'ArrowRight') nextImage(1);
-            });
-
+            /* ---------- PDF modal ---------- */
             const pdfBtn = document.getElementById('open-pdf');
             const pdfBox = document.getElementById('pdfbox');
             const pdfClose = document.getElementById('pdf-close');
@@ -2032,8 +2901,7 @@
             if (pdfBtn && pdfBox) {
                 pdfBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const pdfUrl = '自動化実例集.pdf';
-                    pdfFrame.src = pdfUrl;
+                    pdfFrame.src = '自動化実例集.pdf';
                     pdfBox.classList.add('open');
                     pdfBox.setAttribute('aria-hidden', 'false');
                 });
@@ -2048,6 +2916,18 @@
                     if (e.target === pdfBox) pdfClose.click();
                 });
             }
+
+            /* ---------- Keyboard ---------- */
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (lightbox.classList.contains('open')) { closeLightbox(); return; }
+                    if (pdfBox && pdfBox.classList.contains('open')) { pdfClose.click(); return; }
+                    if (nav.classList.contains('open')) { toggleMenu(); return; }
+                }
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'ArrowLeft') nextImage(-1);
+                if (e.key === 'ArrowRight') nextImage(1);
+            });
         });
     </script>
     <script>
