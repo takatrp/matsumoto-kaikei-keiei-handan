@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>次の一手まで決める経営判断支援｜税理士法人松本会計</title>
-    <meta name="description" content="支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。無料公開ツールで考え方を体験し、松本会計が月次体制づくりから実行・検証まで伴走します。" />
+    <title>月次の数字を次の一手に変える経営判断支援｜税理士法人松本会計</title>
+    <meta name="description" content="会計を報告で終わらせず、月次の数字を次の一手へ。支出・採用・値上げ・設備投資を必要売上へ換算し、単価・数量・自動化から打ち手を整理。松本会計が自計化と月次体制づくりから実行・検証まで伴走します。" />
     <link rel="canonical" href="https://takatrp.github.io/matsumoto-kaikei-jidouka/" />
     <meta name="theme-color" content="#578899" />
 
@@ -454,6 +454,10 @@
             letter-spacing: 0.015em;
         }
 
+        .hero-title-line {
+            display: block;
+        }
+
         .hero-title-sub {
             display: flex;
             width: -moz-fit-content;
@@ -489,6 +493,14 @@
             line-height: 2;
         }
 
+        .hero-desc p {
+            margin: 0;
+        }
+
+        .hero-desc p + p {
+            margin-top: 10px;
+        }
+
         .hero-desc strong {
             color: var(--brand-dark);
         }
@@ -497,6 +509,23 @@
             display: flex;
             gap: 14px;
             flex-wrap: wrap;
+        }
+
+        .hero-aux-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 16px;
+            color: var(--brand-dark);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: rgba(62, 100, 115, 0.35);
+            text-underline-offset: 4px;
+        }
+
+        .hero-aux-link:hover {
+            color: var(--brand);
+            text-decoration-color: currentColor;
         }
 
         .hero-media {
@@ -638,6 +667,184 @@
             color: var(--text-sub);
             line-height: 1.8;
             margin: 0;
+        }
+
+        /* ==========================================================
+           Tool system (独自ツールを作る理由)
+           ========================================================== */
+        #tool-system {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tool-system-copy {
+            max-width: 860px;
+            margin: 0 auto 36px;
+            color: var(--text-sub);
+            font-size: 16px;
+            line-height: 1.95;
+        }
+
+        .tool-system-copy p {
+            margin: 0;
+        }
+
+        .tool-system-copy p + p,
+        .tool-system-copy .decision-questions + p {
+            margin-top: 18px;
+        }
+
+        .decision-questions {
+            list-style: none;
+            margin: 18px 0 0;
+            padding: 22px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            border-left: 4px solid var(--brand);
+            border-radius: var(--radius-sm);
+            color: var(--brand-deep);
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .decision-questions li + li {
+            margin-top: 8px;
+        }
+
+        .tool-system-values {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            list-style: none;
+            padding: 0;
+            margin: 0 0 36px;
+        }
+
+        .tool-system-values li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 72px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid var(--border-strong);
+            border-radius: var(--radius-sm);
+            color: var(--brand-deep);
+            font-size: 13.5px;
+            font-weight: 700;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .tool-system-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .portal-role-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: clamp(28px, 4vw, 40px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .portal-role-card--internal {
+            background: linear-gradient(145deg, #ffffff, #f7fafb);
+        }
+
+        .portal-role-badge {
+            align-self: flex-start;
+            margin-bottom: 14px;
+            padding: 5px 13px;
+            border: 1px solid rgba(87, 136, 153, 0.22);
+            border-radius: 99px;
+            background: var(--brand-pale);
+            color: var(--brand-dark);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .portal-role-card h3 {
+            margin: 0 0 12px;
+            color: var(--brand-deep);
+            font-size: clamp(21px, 2.4vw, 26px);
+        }
+
+        .portal-role-card > p {
+            margin: 0;
+            color: var(--text-sub);
+        }
+
+        .portal-role-list {
+            display: grid;
+            gap: 11px;
+            list-style: none;
+            padding: 0;
+            margin: 24px 0 28px;
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        .portal-role-list li {
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .portal-role-list li::before {
+            content: "";
+            position: absolute;
+            top: 0.62em;
+            left: 3px;
+            width: 10px;
+            height: 6px;
+            border-left: 2px solid var(--brand);
+            border-bottom: 2px solid var(--brand);
+            transform: rotate(-45deg);
+        }
+
+        .portal-role-card .btn {
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .portal-role-note {
+            margin-top: auto !important;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            color: var(--text-faint) !important;
+            font-size: 13px;
+        }
+
+        .tool-system-conclusion {
+            max-width: 900px;
+            margin: 30px auto 0;
+            padding: 24px 28px;
+            border-radius: var(--radius-md);
+            background: var(--brand-deep);
+            color: #fff;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tool-system-conclusion strong {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--font-serif);
+            font-size: clamp(19px, 2.5vw, 24px);
+            line-height: 1.55;
+        }
+
+        .tool-system-conclusion p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 14px;
         }
 
         /* ==========================================================
@@ -1700,6 +1907,23 @@
         }
 
         @media (max-width: 768px) {
+            .hero .cta-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero .cta-row .btn {
+                width: 100%;
+                padding-right: 20px;
+                padding-left: 20px;
+                justify-content: center;
+            }
+
+            .hero-aux-link {
+                justify-content: center;
+                width: 100%;
+            }
+
             .media-frame {
                 margin-top: 8px;
             }
@@ -1719,6 +1943,19 @@
             .portal-features-grid {
                 grid-template-columns: 1fr;
                 gap: 14px;
+            }
+
+            .tool-system-values,
+            .tool-system-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-system-values {
+                gap: 8px;
+            }
+
+            .tool-system-values li {
+                min-height: auto;
             }
 
             .automation-grid {
@@ -2026,8 +2263,8 @@
     <link rel="preload" as="image" href="hero3.jpg" />
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="次の一手まで決める経営判断支援｜税理士法人松本会計">
-    <meta property="og:description" content="支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。松本会計は、月次体制づくりから打ち手の実行・検証まで伴走します。">
+    <meta property="og:title" content="月次の数字を次の一手に変える経営判断支援｜税理士法人松本会計">
+    <meta property="og:description" content="会計を報告で終わらせず、月次の数字を次の一手へ。支出・採用・値上げ・設備投資を必要売上へ換算し、単価・数量・自動化から打ち手を整理。松本会計が自計化と月次体制づくりから実行・検証まで伴走します。">
     <meta property="og:image" content="https://takatrp.github.io/matsumoto-kaikei-jidouka/hero3.jpg">
     <meta property="og:url" content="https://takatrp.github.io/matsumoto-kaikei-jidouka/">
     <meta property="og:site_name" content="税理士法人松本会計">
@@ -2043,7 +2280,7 @@
           "name": "税理士法人松本会計",
           "url": "https://www.matsumoto-kaikei.or.jp/",
           "image": "https://takatrp.github.io/matsumoto-kaikei-jidouka/hero3.jpg",
-          "description": "支出額を売上換算し、単価・数量・自動化の3方向から打ち手を整理。月次体制づくりから実行・検証まで伴走する経営判断支援。",
+          "description": "会計を報告で終わらせず、月次の数字を次の一手へ。自計化と月次体制づくりから実行・検証まで伴走する経営判断支援。",
           "telephone": "+81-859-44-6195",
           "areaServed": "JP"
         },
@@ -2147,7 +2384,7 @@
 
     <div class="mobile-cta" role="region" aria-label="固定アクション">
         <a class="btn btn-primary btn-block" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry"
-            target="_blank" rel="noopener" data-cta="mobile-contact">次の一手を一緒に整理する</a>
+            target="_blank" rel="noopener" data-cta="mobile-contact">経営判断支援について相談する</a>
     </div>
 
     <main id="main-content">
@@ -2156,21 +2393,20 @@
                 <div class="hero-content fade-in-up">
                     <h1 class="hero-title">
                         <span class="hero-title-sub">松本会計の経営判断支援</span>
-                        必要売上を出すだけで終わらせない。<br>
-                        <span class="text-gradient">次の一手まで</span>決める。
+                        <span class="hero-title-line">会計を、報告で終わらせない。</span>
+                        <span class="hero-title-line">月次の数字を、<span class="text-gradient">次の一手</span>に変える。</span>
                     </h1>
-                    <p class="hero-desc">
-                        設備投資、値上げ、採用、固定費増。<br>
-                        支出を「売上に直すといくらか」で終わらせず、<br>
-                        <strong>単価・数量・自動化</strong>のどこで回収するかまで整理します。<br>
-                        自計化と月次の数字をもとに、次の一手まで一緒に決めます。
-                    </p>
+                    <div class="hero-desc">
+                        <p>支出、採用、値上げ、設備投資。まず「売上に直すといくらか」を明らかにし、<strong>単価・数量・自動化</strong>のどこで回収するかを整理します。</p>
+                        <p>自計化、変動損益計算書、独自ツール、月次の対話。松本会計は、数字が早く見える体制づくりから、実行・検証まで伴走します。</p>
+                    </div>
                     <div class="cta-row">
-                        <a class="btn btn-primary btn-lg" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="hero-tool-portal">無料ツールを試す
+                        <a class="btn btn-primary btn-lg" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" data-cta="hero-convert-to-sales">支出を売上に直してみる
                             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
-                        <a class="btn btn-outline btn-lg" href="#contact" data-cta="hero-contact">次の一手を一緒に整理する</a>
+                        <a class="btn btn-outline btn-lg" href="#contact" data-cta="hero-contact">経営判断支援について相談する</a>
                     </div>
+                    <a class="hero-aux-link" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="hero-tool-portal">20以上の独自ツールを見る →</a>
                 </div>
 
                 <div class="hero-media fade-in-up delay-100">
@@ -2216,7 +2452,68 @@
             </div>
         </section>
 
-        <section id="sale-kit-value" class="section-padding bg-light">
+        <section id="tool-system" class="section-padding bg-light">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <span class="section-subtitle">Why We Build</span>
+                    <h2>経営助言を、<br>担当者個人の経験だけに委ねない。</h2>
+                </div>
+
+                <div class="tool-system-copy fade-in-up delay-100">
+                    <p>経営者に必要なのは、数字の説明だけではありません。</p>
+                    <ul class="decision-questions">
+                        <li>「この支出を回収するには、いくら売上が必要か」</li>
+                        <li>「値上げと数量増加のどちらを選ぶか」</li>
+                        <li>「どの業務を自動化し、生まれた時間をどこへ使うか」</li>
+                    </ul>
+                    <p>松本会計では、こうした判断の進め方を独自ツールへ落とし込んでいます。顧問先とは共用ツールを見ながら対話し、スタッフは所内ツールで論点や前提を確認します。</p>
+                    <p>誰が担当しても同じ観点から問いかけられるよう、所長や担当者の知識と経験を、組織で使える仕組みに変えています。</p>
+                    <p>ツールが経営判断を代行するわけではありません。経営者と税理士が同じ数字を見て、より良い対話をするための共通言語です。</p>
+                </div>
+
+                <ul class="tool-system-values fade-in-up delay-100" aria-label="独自ツールの価値">
+                    <li>20以上の独自ツール</li>
+                    <li>顧問先と同じ画面で対話</li>
+                    <li>所内の判断・説明品質を標準化</li>
+                    <li>月次で実行と結果を確認</li>
+                </ul>
+
+                <div class="tool-system-grid fade-in-up delay-100">
+                    <article class="portal-role-card">
+                        <span class="portal-role-badge">顧問先と使う</span>
+                        <h3>共用ツールポータル</h3>
+                        <p>経営者と担当者が、同じ数字と同じ画面を見ながら判断するための入口です。</p>
+                        <ul class="portal-role-list">
+                            <li>支出・投資を必要売上へ換算</li>
+                            <li>値上げ、採用、自動化を数字で検討</li>
+                            <li>単価・数量・自動化から打ち手を整理</li>
+                            <li>次の一歩と確認ポイントを決定</li>
+                        </ul>
+                        <a class="btn btn-primary" href="https://takatrp.github.io/tool-portal/?start=1" target="_blank" rel="noopener" data-cta="tool-system-public-portal">公開ツールを見る</a>
+                    </article>
+
+                    <article class="portal-role-card portal-role-card--internal">
+                        <span class="portal-role-badge">スタッフが使う</span>
+                        <h3>スタッフポータル</h3>
+                        <p>面談前の論点整理と、税務・会計・経営助言の品質を組織で揃えるための所内基盤です。</p>
+                        <ul class="portal-role-list">
+                            <li>面談前に論点と前提を整理</li>
+                            <li>税務・会計の試算を標準化</li>
+                            <li>担当者ごとの説明差を縮小</li>
+                            <li>活用事例を所内で共有</li>
+                        </ul>
+                        <p class="portal-role-note">所内運用のため、公開リンクは設けていません。</p>
+                    </article>
+                </div>
+
+                <div class="tool-system-conclusion fade-in-up delay-100">
+                    <strong>共通の数字と共通の問いで、月次の対話を組織的に再現する。</strong>
+                    <p>共用ポータルは顧問先との対話を、スタッフポータルは所内の準備と品質を支えます。二つを分けることで、使いやすさと専門性を両立しています。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sale-kit-value" class="section-padding">
             <div class="container">
                 <div class="section-header fade-in-up">
                     <span class="section-subtitle">Action Design</span>
@@ -2402,10 +2699,10 @@
                             証憑保存、銀行データ受信、給与計算、販売管理、レジ連携まで整備し、
                             “入力”から“連携”へ変えていきます。
                         </p>
-                        <div class="stat-box">
-                            <div class="stat-label">自動化率</div>
-                            <div class="stat-value"><span class="stat-num" data-count="90">0</span><small>%</small><span class="stat-plus">超</span></div>
-                            <div class="stat-desc">浮いた時間を、付加価値活動へ振り向ける設計まで支援します</div>
+                        <div class="stat-box" aria-label="仕訳自動化率90％超の事例も">
+                            <div class="stat-label">仕訳自動化率</div>
+                            <div class="stat-value"><span class="stat-num" data-count="90">90</span><small>%</small><span class="stat-plus">超の事例も</span></div>
+                            <div class="stat-desc">証憑保存、銀行データ受信、販売管理などにより自動化した仕訳の割合です。導入範囲や運用状況により結果は異なります。</div>
                         </div>
                         <div class="cta-row">
                             <a class="btn btn-accent" href="https://takatrp.github.io/jidouka-kouka-LP/"
@@ -2527,7 +2824,7 @@
                 <div class="results-container fade-in-up delay-100">
                     <div class="result-card main-result">
                         <div class="result-head">
-                            <h3>黒字申告割合（顧問先）</h3>
+                            <h3>自計化関与先の黒字申告割合</h3>
                             <span class="badge-highlight">約1.73倍</span>
                         </div>
                         <div class="chart-wrap">
@@ -2549,7 +2846,7 @@
                             </div>
                         </div>
                         <p class="result-note">
-                            ※ 松本会計の実績値は所内集計による63.3%（R7年5月〜R8年4月）。比較対象として、国税庁統計の黒字割合 36.5% を掲載。
+                            ※ 集計期間：R7年5月〜R8年4月申告分。松本会計の自計化関与先と全国平均の単純比較であり、業種・企業規模等の構成は異なります。
                         </p>
 
                     </div>
