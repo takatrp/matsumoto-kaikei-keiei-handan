@@ -458,6 +458,11 @@
             display: block;
         }
 
+        .hero-title-phrase {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
         .hero-title-sub {
             display: flex;
             width: -moz-fit-content;
@@ -949,6 +954,68 @@
             color: var(--text-sub);
             line-height: 1.9;
             margin: 0;
+        }
+
+        .model-case {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: clamp(28px, 5vw, 48px);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .model-case-label {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: var(--brand-dark);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .model-case h3 {
+            color: var(--brand-deep);
+            font-size: clamp(20px, 2.4vw, 25px);
+            margin-bottom: 14px;
+        }
+
+        .model-case > p {
+            color: var(--text-sub);
+        }
+
+        .model-case-options {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .model-case-option {
+            background: var(--brand-pale);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+        }
+
+        .model-case-option h4 {
+            color: var(--brand-deep);
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .model-case-option p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .model-case-decision {
+            border-left: 4px solid var(--brand);
+            padding-left: 18px;
+        }
+
+        .model-case-decision p:last-child {
+            margin-bottom: 0;
         }
 
         /* ==========================================================
@@ -1630,6 +1697,12 @@
             margin-bottom: 0;
         }
 
+        .result-note a {
+            color: var(--brand-dark);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
         /* ==========================================================
            FAQ accordion
            ========================================================== */
@@ -1907,6 +1980,10 @@
         }
 
         @media (max-width: 768px) {
+            .model-case-options {
+                grid-template-columns: 1fr;
+            }
+
             .hero .cta-row {
                 flex-direction: column;
                 align-items: stretch;
@@ -2329,6 +2406,14 @@
             },
             {
               "@type": "Question",
+              "name": "初回相談はどこから申し込めますか？",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "お問い合わせフォームで相談内容の「経営助言」を選び、検討したい支出や判断をお知らせください。電話でもお問い合わせいただけます。初回相談の費用・所要時間・準備資料は、お申し込み前にフォームまたは電話でご確認ください。"
+              }
+            },
+            {
+              "@type": "Question",
               "name": "コスト（料金）はどのように決まりますか？",
               "acceptedAnswer": {
                 "@type": "Answer",
@@ -2393,7 +2478,7 @@
                 <div class="hero-content fade-in-up">
                     <h1 class="hero-title">
                         <span class="hero-title-sub">松本会計の経営判断支援</span>
-                        <span class="hero-title-line">会計を、報告で終わらせない。</span>
+                        <span class="hero-title-line"><span class="hero-title-phrase">会計を、報告で</span><span class="hero-title-phrase">終わらせない。</span></span>
                         <span class="hero-title-line">月次の数字を、<span class="text-gradient">次の一手</span>に変える。</span>
                     </h1>
                     <div class="hero-desc">
@@ -2525,26 +2610,11 @@
                     </p>
                 </div>
 
-                <div class="feature-list fade-in-up delay-100">
-                    <div class="feature-item">
-                        <span class="check-icon" aria-hidden="true">✓</span>
-                        <div><strong>売上換算</strong>：支出額を「必要な売上」に変換</div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="check-icon" aria-hidden="true">✓</span>
-                        <div><strong>打ち手比較</strong>：単価・数量・自動化の3方向で整理</div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="check-icon" aria-hidden="true">✓</span>
-                        <div><strong>行動化</strong>：最初の一歩と確認ポイントまで明確化</div>
-                    </div>
-                </div>
-
                 <div class="grid grid-3 fade-in-up delay-100">
                     <div class="approach-card">
                         <div class="card-num" aria-hidden="true">01</div>
                         <h3>売上換算する</h3>
-                        <p>支出や投資を、限界利益率から「必要な売上」に換算。まず、回収すべき金額を明確にします。</p>
+                        <p>毎月の費用増を限界利益率から必要売上へ換算し、判断の出発点を揃えます。</p>
                     </div>
                     <div class="approach-card">
                         <div class="card-num" aria-hidden="true">02</div>
@@ -2607,26 +2677,6 @@
                     <div class="scroll-hint">SCROLL &rarr;</div>
                 </div>
 
-                <div class="benefit-flow fade-in-up delay-200">
-                    <div class="benefit-list">
-                        <ul>
-                            <li>支出額を「必要売上」に変える</li>
-                            <li>単価・数量・自動化のどれで回収するか整理する</li>
-                            <li>最初の一歩と確認ポイントを明確にする</li>
-                            <li>月次で検証し、打ち手を磨き込む</li>
-                        </ul>
-                    </div>
-                    <div class="benefit-arrow" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-                    <div class="benefit-result">
-                        数字が「気づき」で終わらず、<br>経営の行動に変わる
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -2738,25 +2788,28 @@
         <section id="approach" class="section-padding">
             <div class="container">
                 <div class="section-header text-center fade-in-up">
-                    <span class="section-subtitle">Our Approach</span>
-                    <h2>数字を行動に変える 3本柱</h2>
+                    <span class="section-subtitle">Model Case</span>
+                    <h2>数字から、次の判断へ</h2>
                 </div>
-                <div class="grid grid-3 gap-lg fade-in-up delay-100">
-                    <div class="approach-card">
-                        <div class="card-num" aria-hidden="true">01</div>
-                        <h3>必要売上の見える化</h3>
-                        <p>支出や投資を「売上に直すといくらか」で把握し、経営判断の前提を揃えます。</p>
+                <div class="model-case fade-in-up delay-100">
+                    <span class="model-case-label">架空のモデルケース・実際の顧問先事例ではありません</span>
+                    <h3>月10万円の固定費増を、どう負担するか</h3>
+                    <p>限界利益率40％、既存の取引が月100件の会社を想定。追加費用を売上だけで賄うなら、月25万円の売上増が目安です（10万円 ÷ 40％）。</p>
+                    <div class="model-case-options" aria-label="打ち手の試算比較">
+                        <div class="model-case-option">
+                            <h4>案A：既存取引の価格を見直す</h4>
+                            <p>1件あたり1,000円の値上げ × 月100件 ＝ 月10万円の利益増。件数と変動費が変わらない場合の試算です。</p>
+                        </div>
+                        <div class="model-case-option">
+                            <h4>案B：新しい売上をつくる</h4>
+                            <p>月25万円の追加売上 × 限界利益率40％ ＝ 月10万円の限界利益増。追加の固定費が生じない場合の試算です。</p>
+                        </div>
                     </div>
-                    <div class="approach-card">
-                        <div class="card-num" aria-hidden="true">02</div>
-                        <h3>単価・数量・自動化で整理</h3>
-                        <p>必要売上をどう作るかを3方向から整理し、感覚ではなく数字で打ち手を選びます。</p>
+                    <div class="model-case-decision">
+                        <p><strong>選ぶ行動：</strong>まず価格改定案を検討し、対象取引と説明方法を決める。同時に、作業の自動化で費用増を抑えられないか確認します。</p>
+                        <p><strong>翌月の確認：</strong>改定後の単価、取引件数、限界利益、追加費用を照合し、想定との差があれば方針を見直します。</p>
                     </div>
-                    <div class="approach-card">
-                        <div class="card-num" aria-hidden="true">03</div>
-                        <h3>月次伴走で実行・検証</h3>
-                        <p>試算して終わらせず、巡回監査と対話の中で、実行状況と結果を毎月見直します。</p>
-                    </div>
+                    <p class="note-text">売上換算は最初の目安です。設備投資などの判断では、回収期間や資金繰りも含めて検討します。</p>
                 </div>
             </div>
         </section>
@@ -2837,7 +2890,7 @@
                                 </div>
                             </div>
                             <div class="bar-group">
-                                <div class="bar-label">全国平均</div>
+                                <div class="bar-label">全国（国税庁・令和6年度）</div>
                                 <div class="bar-area">
                                     <div class="bar secondary" style="--target-width: 36.5%;">
                                         <span class="bar-val">36.5%</span>
@@ -2846,7 +2899,7 @@
                             </div>
                         </div>
                         <p class="result-note">
-                            ※ 集計期間：R7年5月～R8年4月申告分。松本会計の自計化関与先の黒字申告割合63.3％と、国税庁統計の黒字割合36.5％との単純比較です。業種・企業規模等の構成は異なります。
+                            ※ 当事務所：令和7年5月～令和8年4月申告分の自計化関与先63.3％。全国：<a href="https://www.nta.go.jp/information/release/kokuzeicho/2025/hojin_shinkoku/pdf/hojin_shinkoku.pdf" target="_blank" rel="noopener">国税庁「令和6事務年度 法人税等の申告（課税）事績の概要」別表2</a>の黒字申告割合36.5％。63.3÷36.5≒1.73の参考比較です。集計期間と業種・企業規模等の構成が異なり、支援の効果を示す比較ではありません。
                         </p>
 
                     </div>
@@ -2910,6 +2963,15 @@
                         </div>
                     </details>
                     <details class="acc-item">
+                        <summary class="acc-head">初回相談はどこから申し込めますか？<span class="icon" aria-hidden="true"></span></summary>
+                        <div class="acc-body">
+                            <div class="inner">
+                                お問い合わせフォームで相談内容の「経営助言」を選び、検討したい支出や判断をお知らせください。
+                                電話でもお問い合わせいただけます。初回相談の費用・所要時間・準備資料は、お申し込み前にフォームまたは電話でご確認ください。
+                            </div>
+                        </div>
+                    </details>
+                    <details class="acc-item">
                         <summary class="acc-head">コスト（料金）はどのように決まりますか？<span class="icon" aria-hidden="true"></span></summary>
                         <div class="acc-body">
                             <div class="inner">
@@ -2933,6 +2995,7 @@
                         会社側での体制整備も重要になります。<br>
                         オンライン／来所どちらも対応可能です。
                     </p>
+                    <p>フォームの相談内容は「経営助言」をお選びください。初回相談の費用・所要時間・準備資料は、お申し込み前にフォームまたは電話でご確認いただけます。</p>
                     <a class="btn btn-accent btn-lg btn-wide" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry"
                         target="_blank" rel="noopener" data-cta="contact-contract">次の一手を一緒に整理する
                         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
